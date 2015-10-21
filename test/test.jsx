@@ -1,5 +1,6 @@
 var MyModule = require('../src/mymodule.jsx');
 var MyES6Module = require('../src/es6module.jsx');
+var TSModule = require('../src/tsmodule.ts');
 var React = require('react');
 var TestUtils = require('react/addons').addons.TestUtils;
 
@@ -22,5 +23,10 @@ describe('my test suite', function() {
         );
 
         expect(moduleInstance.getText()).to.equal('rofl');
+    });
+
+    it('does something part 3', function () {
+        var t = new TSModule()
+        expect(t.getText()).to.equal('boop');
     });
 });

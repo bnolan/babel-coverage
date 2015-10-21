@@ -16,18 +16,31 @@ module.exports = function(config) {
     frameworks: ['mocha', 'sinon-chai', 'browserify'],
     files: [
       './src/*.js?(x)',
+      './src/*.ts?(x)',
       './test/*.js?(x)'
     ],
     exclude: [],
     browserify: {
-        transform: [
+          debug: true,
+          plugin: [
+                ['tsify', {
+                    module: 'commonjs',
+                    target: 'es5',
+                    noImplicitAny: true,
+                    removeComments: false,
+                    sourcemap: true,
+                    preserveConstEnums: true
+                }]
+            ],
+          transform: [
             'babelify',
             istanbul()
         ],
-        extensions: ['.js', '.jsx']
+        extensions: ['.js', '.jsx', '.ts']
     },
     preprocessors: {
       './src/*.js?(x)': ['browserify'],
+      './src/*.ts': ['browserify'],
       './test/*.js?(x)': ['browserify']
     },
     reporters: ['progress', 'coverage'],
